@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        tr,td,th{   text-align:center;  }
+
+        tr{ margin-top:2px; }
+
+        table{  box-shadow: 5px 5px 20px grey;  }
+
+        .chart-container1 {
+            max-width:600px;
+            max-height:400px;
+        }
+        .chart-container2 {
+            max-width:600px;
+            max-height:400px;
+        }
+    </style>
+</head>
+<body><br>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Diabetes Prediction</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav><br>
+
+    <div class="container">
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Algorithm</th>
+          <th scope="col">Accuracy</th>
+          <th scope="col">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for key, values in data.items %}
+            <tr class="table-light">
+                <td>{{ key }}</td>
+                {% for v in values %}
+                    <td>{{ v }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+      </tbody>
+    </table>
+    </div><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container col-sm-5">
+                <table class="table table-striped table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th style="max-width: 90px;" scope="col">Parameter</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for key, values in Parameters.items %}
+                        <tr>
+                            <td style="max-width: 90px;">{{ key }}</td>
+                            <td>{{ values }}</td>
+                        </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+            <div class="container col-sm-5">
+        <div class="card">
+          <div class="card-header bg-dark">
+            <center><b style="color:white;">All Used Algorithm's Accuracy Comparision </b></center>
+          </div>
+            <div class="card-body chart-container2 container">
+                <div class="row">
+                    <div class="col">
+                        <canvas id="myChart2" width="200" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark">
+                    <center><b style="color:white;">Count of High and Low diabetic pedegree in pregnent womens </b></center>
+                  </div>
+                  <div class="card-body chart-container1 container">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="myChart1" width="200" height="223"></canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark">
+                    <center><b style="color:white;">Number of Non diabetic and Diabetic Patients
+                        <span style="color:#E6F405">(Males vs females)</span> </b></center>
+                  </div>
+                  <div class="card-body chart-container1 container">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="myChart4" width="200" height="103"></canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark">
+                    <center><b style="color:white;">Total count of Non diabetic and Diabetic Patients.</b></center>
+                  </div>
+                  <div class="card-body chart-container1 container">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="myChart3" width="200" height="245"></canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark">
+                    <center><b style="color:white;">Count of High and Low BMI Mens & womens </b></center>
+                  </div>
+                  <div class="card-body chart-container1 container">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="myChart5" width="200" height="325"></canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark">
+                    <center><b style="color:white;">Count of High and Low Glucose Mens & womens </b></center>
+                  </div>
+                  <div class="card-body chart-container1 container">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="myChart6" width="200" height="150"></canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark">
+                    <center><b style="color:white;">Count of High and Low Bloodpressure Mens & womens </b></center>
+                  </div>
+                  <div class="card-body chart-container1 container">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="myChart7" width="200" height="150"></canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+    <script>
+    var ctx1 = document.getElementById('myChart1').getContext('2d');
+    var myChart1 = new Chart(ctx1, {
+        type: 'pie',
+        data: {
+            labels: {{labels1|safe}},
+            datasets: [{
+                label: '',
+                data: {{data1|safe}},
+                backgroundColor: [
+                    'rgba(244, 38, 5, 0.4)',
+                    'rgba(17, 241, 83, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(244, 38, 5, 1)',
+                    'rgba(17, 241, 83, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 70
+            }]
+        },
+        options: {
+
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: {{labels2|safe}},
+            datasets: [{
+                label: '',
+                data: {{data2|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(5, 239, 244, 0.4)',
+                    'rgba(15, 240, 106, 0.4)',
+                    'rgba(227, 15, 240, 0.4)',
+                    'rgba(153, 102, 255, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(5, 239, 244, 1)',
+                    'rgba(15, 240, 106, 1)',
+                    'rgba(227, 15, 240, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 40
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+        }
+    });
+
+    var ctx3 = document.getElementById('myChart3').getContext('2d');
+    var myChart3 = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            labels: {{labels3|safe}},
+            datasets: [{
+                label: '',
+                data: {{data3|safe}},
+                backgroundColor: [
+                    'rgba(5,43,244, 0.4)',
+                    'rgba(244, 5, 34 , 0.4)'
+                ],
+                borderColor: [
+                    'rgba(5,43,244, 1)',
+                    'rgba(244, 5, 34 , 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 70
+            }]
+        },
+        options: {
+
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+
+    var ctx4 = document.getElementById('myChart4').getContext('2d');
+    var myChart4 = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: {{labels4|safe}},
+            datasets: [{
+                label: 'count of ',
+                data: {{data4|safe}},
+                backgroundColor: [
+                    'rgba(244, 38, 88, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(15, 240, 106, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(15, 240, 106, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 30
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:true,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: true,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+            indexAxis: 'y'
+        }
+    });
+
+    var ctx5 = document.getElementById('myChart5').getContext('2d');
+    var myChart5 = new Chart(ctx5, {
+        type: 'doughnut',
+        data: {
+            labels: {{labels5|safe}},
+            datasets: [{
+                label: '',
+                data: {{data5|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(5, 239, 244, 0.4)',
+                    'rgba(15, 240, 106, 0.4)',
+                    'rgba(227, 15, 240, 0.4)',
+                    'rgba(153, 102, 255, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(5, 239, 244, 1)',
+                    'rgba(15, 240, 106, 1)',
+                    'rgba(227, 15, 240, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 40
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: true
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+
+    var ctx6 = document.getElementById('myChart6').getContext('2d');
+    var myChart6 = new Chart(ctx6, {
+        type: 'bar',
+        data: {
+            labels: {{labels6|safe}},
+            datasets: [{
+                label: '',
+                data: {{data6|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(5, 44, 244 , 0.4)',
+                    'rgba(15, 240, 106, 0.4)',
+                    'rgba(227, 15, 240, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(5, 44, 244 , 1)',
+                    'rgba(15, 240, 106, 1)',
+                    'rgba(227, 15, 240, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 40
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+        }
+    });
+
+    var ctx7 = document.getElementById('myChart7').getContext('2d');
+    var myChart7 = new Chart(ctx7, {
+        type: 'bar',
+        data: {
+            labels: {{labels7|safe}},
+            datasets: [{
+                label: '',
+                data: {{data7|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(5, 44, 244 , 0.4)',
+                    'rgba(15, 240, 106, 0.4)',
+                    'rgba(227, 15, 240, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(5, 44, 244 , 1)',
+                    'rgba(15, 240, 106, 1)',
+                    'rgba(227, 15, 240, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 40
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+            indexAxis: 'y'
+        }
+    });
+    </script>
+    </body>
+</html>
