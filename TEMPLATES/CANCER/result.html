@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        tr,td,th{
+            text-align:center;
+        }
+        tr{
+            margin-top:5px;
+        }
+        table{
+            box-shadow: 5px 5px 20px grey;
+        }
+    </style>
+</head>
+<body><br>
+    <!-- As a heading -->
+    <nav class="navbar navbar-dark bg-dark">
+        <span style="padding:10px 0px 10px 0px; font-size:20px;" class="navbar-brand mb-0 h1">CANCER DISEASE
+            PREDICTION</span>
+    </nav><br>
+
+    <div class="container">
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Algorithm</th>
+          <th scope="col">Accuracy</th>
+          <th scope="col">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for key, values in data.items %}
+            <tr class="table-light">
+                <td>{{ key }}</td>
+                {% for v in values %}
+                    <td>{{ v }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+      </tbody>
+    </table>
+    </div><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container col-sm-5">
+                <table class="table table-striped table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th style="max-width: 90px;" scope="col">Parameter</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for key, values in Parameters.items %}
+                        <tr>
+                            <td style="max-width: 90px;">{{ key }}</td>
+                            <td>{{ values }}</td>
+                        </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+            <div class="container col-sm-7">
+                <div class="card">
+                  <div class="card-header" style="background-color:#48555B";>
+                    <center><b style="color:white;">All Used Algorithm's Accuracy Comparision </b></center>
+                  </div>
+                    <div style="background-color:#E3ECF2;" class="card-body chart-container2 container">
+                        <div class="row">
+                            <div class="col">
+                                <canvas style="background-color:white; margin: 0px 40px;" id="myChart1" width="200"
+                                        height="110"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header" style="background-color:#48555B";>
+                    <center><b style="color:white;">count of high and low clump thickness patient</b></center>
+                  </div>
+                    <div style="background-color:#E3ECF2;" class="card-body chart-container2 container">
+                        <div class="row">
+                            <div class="col">
+                                <canvas style="background-color:white; margin: 0px 40px;" id="myChart2" width="200"
+                                        height="110"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header" style="background-color:#48555B";>
+                    <center><b style="color:white;">count of high and low clump thickness patient</b></center>
+                  </div>
+                    <div style="background-color:#E3ECF2;" class="card-body chart-container2 container">
+                        <div class="row">
+                            <div class="col">
+                                <canvas style="background-color:white; margin: 0px 40px;" id="myChart3" width="200"
+                                        height="190"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-sm-4">
+                <div class="card">
+                  <div class="card-header" style="background-color:#48555B";>
+                    <center><b style="color:white;">count of high and low clump thickness patient</b></center>
+                  </div>
+                    <div style="background-color:#E3ECF2;" class="card-body chart-container2 container">
+                        <div class="row">
+                            <div class="col">
+                                <canvas style="background-color:white; margin: 0px 40px;" id="myChart4" width="200"
+                                        height="190"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+    <script>
+        var ctx1 = document.getElementById('myChart1').getContext('2d');
+        var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: {{labels1|safe}},
+            datasets: [{
+                label: '',
+                data: {{data1|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(5, 239, 244, 0.4)',
+                    'rgba(15, 240, 106, 0.4)',
+                    'rgba(227, 15, 240, 0.4)',
+                    'rgba(153, 102, 255, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(5, 239, 244, 1)',
+                    'rgba(15, 240, 106, 1)',
+                    'rgba(227, 15, 240, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 50
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+        }
+        });
+
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: {{labels2|safe}},
+            datasets: [{
+                label: '',
+                data: {{data2|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(5, 239, 244, 0.4)',
+                    'rgba(15, 240, 106, 0.4)',
+                    'rgba(227, 15, 240, 0.4)',
+                    'rgba(153, 102, 255, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(5, 239, 244, 1)',
+                    'rgba(15, 240, 106, 1)',
+                    'rgba(227, 15, 240, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 40
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+        }
+        });
+
+        var ctx3 = document.getElementById('myChart3').getContext('2d');
+        var myChart3 = new Chart(ctx3, {
+        type: 'pie',
+        data: {
+            labels: {{labels3|safe}},
+            datasets: [{
+                label: '',
+                data: {{data3|safe}},
+                backgroundColor: [
+                    'rgba(227, 15, 240, 0.4)',
+                    'rgba(4, 163, 244, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(227, 15, 240, 1)',
+                    'rgba(4, 163, 244, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 50
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+        });
+
+        var ctx4 = document.getElementById('myChart4').getContext('2d');
+        var myChart4 = new Chart(ctx4, {
+        type: 'line',
+        data: {
+            labels: {{labels4|safe}},
+            datasets: [{
+                label: '',
+                data: {{data4|safe}},
+                backgroundColor: [
+                    'rgba(4, 244, 7, 0.4)',
+                    'rgba(4, 76, 244, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(4, 244, 7, 1)',
+                    'rgba(4, 76, 244, 1)'
+                ],
+                borderWidth: 3,
+                barThickness: 50
+            }]
+        },
+        options: {
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (context) => {
+                            return context[0].label.replaceAll(",", " ");
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder:false,
+                        drawOnChartArea: true,
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        drawOnChartArea: true,
+                    }
+                },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+        });
+    </script>
+
+</body>
+</html>
