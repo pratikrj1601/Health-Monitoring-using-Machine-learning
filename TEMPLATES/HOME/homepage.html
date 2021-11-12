@@ -1,0 +1,352 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;700&family=Noto+Sans:wght@400;700&display=swap');
+        .header{
+            margin:0px 0px 40px 0px;
+            padding:10px 40px 10px 10px;
+            font-size: 18px;
+        }
+        .navbar-brand
+        {
+            padding-left: 30px;
+        }
+        li .nav-link
+        {
+            color:white;
+        }
+        li .nav-link:hover
+        {
+            color:#28F5FA;
+        }
+
+        .container
+        {
+            margin-top:40px;
+            width:130%;
+        }
+
+        .card-row
+        {
+            display:flex;
+            margin: 60px 20px 60px 20px;
+            text-align:center;
+            overflow:hidden;
+
+        }
+        .fig{
+            width:380px;
+            overflow:hidden;
+        }
+        .animation:hover{
+            transform: scale(1.2);
+        }
+
+        *{
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        header,#intro
+        {
+            height: 100%;
+        }
+
+        .first-row {
+
+          position: relative;
+          border: 3px solid green;
+        }
+
+        .first-col {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+
+        aside {
+          width: 30%;
+          padding-left: 15px;
+          margin-left: 15px;
+          float: right;
+          font-style: italic;
+          background-color: lightgray;
+        }
+
+        footer .main-footer{  padding: 20px 0;  background: #252525;}
+        footer ul{  padding-left: 0;  list-style: none;}
+
+        /* Copy Right Footer */
+        .footer-copyright { background: #222; padding: 5px 0;}
+        .footer-copyright .logo {    display: inherit;}
+        .footer-copyright nav {    float: right;    margin-top: 5px;}
+        .footer-copyright nav ul {  list-style: none; margin: 0;  padding: 0;}
+        .footer-copyright nav ul li { border-left: 1px solid #505050; display: inline-block;  line-height: 12px;  margin: 0;  padding: 0 8px;}
+        .footer-copyright nav ul li a{  color: #969696;}
+        .footer-copyright nav ul li:first-child { border: medium none;  padding-left: 0;}
+        .footer-copyright p { color: #969696; margin: 2px 0 0;}
+
+        /* Footer Top */
+        .footer-top{  background: #252525;  padding-bottom: 30px; margin-bottom: 30px;  border-bottom: 3px solid #222;}
+
+        /* Footer transparent */
+        footer.transparent .footer-top, footer.transparent .main-footer{  background: transparent;}
+        footer.transparent .footer-copyright{ background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3) ;}
+
+        /* Footer light */
+        footer.light .footer-top{ background: #f9f9f9;}
+        footer.light .main-footer{  background: #f9f9f9;}
+        footer.light .footer-copyright{ background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3) ;}
+
+        /* Footer 4 */
+        .footer- .logo {    display: inline-block;}
+
+        /*====================
+          Widgets
+        ====================== */
+        .widget{  padding: 20px;  margin-bottom: 40px;}
+        .widget.widget-last{  margin-bottom: 0px;}
+        .widget.no-box{ padding: 0; background-color: transparent;  margin-bottom: 40px;
+          box-shadow: none; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none;}
+        .widget.subscribe p{  margin-bottom: 18px;}
+        .widget li a{ color: #ff8d1e;}
+        .widget li a:hover{ color: #4b92dc;}
+        .widget-title {margin-bottom: 20px;}
+        .widget-title span {background: #839FAD none repeat scroll 0 0;display: block; height: 1px;margin-top: 25px;position: relative;width: 20%;}
+        .widget-title span::after {background: inherit;content: "";height: inherit;    position: absolute;top: -4px;width: 50%;}
+        .widget-title.text-center span,.widget-title.text-center span::after {margin-left: auto;margin-right:auto;left: 0;right: 0;}
+        .widget .badge{ float: right; background: #7f7f7f;}
+
+        .typo-light h1,
+        .typo-light h2,
+        .typo-light h3,
+        .typo-light h4,
+        .typo-light h5,
+        .typo-light h6,
+        .typo-light p,
+        .typo-light div,
+        .typo-light span,
+        .typo-light small{  color: #fff;}
+
+        ul.social-footer2 { margin: 0;padding: 0; width: auto;}
+        ul.social-footer2 li {display: inline-block;padding: 0;}
+        ul.social-footer2 li a:hover {background-color:#ff8d1e;}
+        ul.social-footer2 li a {display: block; height:30px;width: 30px;text-align: center;}
+        footer .btn{background-color: #ff8d1e; color:#fff;}
+        footer .btn:hover, .btn:focus, .btn.active {background: #4b92dc;color: #fff;
+        -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        -ms-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        -o-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        -webkit-transition: all 250ms ease-in-out 0s;
+        -moz-transition: all 250ms ease-in-out 0s;
+        -ms-transition: all 250ms ease-in-out 0s;
+        -o-transition: all 250ms ease-in-out 0s;
+        transition: all 250ms ease-in-out 0s;
+    </style>
+
+</head>
+
+<body>
+    <section>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="">Disease Prediction System</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="/diabetes">Diabetes</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/heart_disease">Heart disease</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/liver">Liver</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/cancer">Breast cancer</a>
+                    </li>
+              </ul>
+            </div>
+      </nav><br>
+        <div id="carouselExampleIndicator" class="carousel slide carousel-fade" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicator" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicator" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicator" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicator" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicator" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicator" data-bs-slide-to="5" aria-label="Slide 6"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicator" data-bs-slide-to="6" aria-label="Slide 7"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img style="height:550px;" src="{% static 'img5.jpg' %}" class="w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img style="height:550px;" src="{% static 'img2.jpg' %}" class="w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img style="height:550px;" src="{% static 'img3.jpg' %}" class="w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img style="height:550px;" src="{% static 'img4.jpeg' %}" class="w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img style="height:550px;" src="{% static 'img7.jpg' %}" class="w-100" alt="...">
+            </div>
+              <div class="carousel-item">
+              <img style="height:550px;" src="{% static 'img8.jpg' %}" class="w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img style="height:550px;" src="{% static 'img6.jpg' %}" class="w-100" alt="...">
+            </div>
+          </div>
+        </div>
+
+        <div class="card-row">
+            <div class="col-sm-4 fig">
+                  <img class="img-fluid animation" style="height:210px; width:380px;" src="{% static 'image1.jpg' %}" alt="Card image cap">
+            </div>
+            <div class="col-sm-4 fig">
+                  <img class="img-fluid animation" style="height:210px; width:380px;" src="{% static 'image2.png' %}" alt="Card image cap">
+            </div>
+
+            <div class="col-sm-4 fig">
+                  <img class="img-fluid animation" style="height:210px; width:380px;" src="{% static 'image3.jpeg' %}" alt="Card image cap">
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center" data-aos="zoom-in">
+                <div style="padding:10px; background-color:white;" class="col-sm-4">
+                    <img style="width:550px; height:250px;" class="rounded-3 shadow p-1 bg-white rounded img-fluid" src="{% static 'image1.jpg' %}">
+                </div>
+                <div style="padding:10px; text-align:justify; background-color:white;" class="col-sm-7">
+                    <div style="font-size: 20px; padding:10px; color:white;">
+                        <b class="rounded-3 d-inline-flex shadow-sm p-2 mb-2 bg-dark rounded">Diabetses</b></div>
+                    <p class="shadow-lg p-3 mb-2 bg-white rounded">Diabetes is a disease that occurs when your blood glucose, also called blood sugar, is too high.
+                       Blood glucose is your main source of energy and comes from the food you eat. Insulin, a hormone made by the pancreas, helps glucose from food get into your cells to be used for energy. Sometimes your body doesn’t make enough—or any—insulin or doesn’t use insulin well.
+                       Glucose then stays in your blood and doesn’t reach your cells.<br>
+                       Over time, having too much glucose in your blood can cause health problems. Although diabetes has no cure, you can take steps to manage your diabetes and stay healthy.</p>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="container-fluid ">
+            <div class="row d-flex justify-content-center" data-aos="zoom-in">
+                <div style="padding:10px; background-color:white;" class="col-sm-4">
+                    <img style="width:550px; height:250px;" class="rounded-3 shadow p-1 bg-white rounded img-fluid" src="{% static 'image2.png' %}">
+                </div>
+                <div style="padding:10px; text-align:justify; background-color:white;" class="col-sm-7">
+                    <div style="font-size: 20px; padding:10px; color:white;">
+                        <b class="rounded-3 d-inline-flex shadow-sm p-2 mb-2 bg-dark rounded">Heart Disease</b></div>
+                    <p class="shadow-lg p-3 mb-2 bg-white rounded">
+                        Sometimes heart disease may be “silent” and not diagnosed until a person experiences signs or
+                        symptoms of a heart attack, heart failure, or an arrhythmia. When these events happen,
+                        symptoms may include<br>
+                        Heart attack: Chest pain or discomfort, upper back or neck pain, indigestion, heartburn,
+                        nausea or vomiting, extreme fatigue, upper body discomfort, dizziness, and shortness of
+                        breath.<br>
+                        Arrhythmia: Fluttering feelings in the chest (palpitations).<br>
+                        Heart failure: Shortness of breath, fatigue, or swelling of the feet, ankles, legs, abdomen, or neck veins.
+                    </p>
+                </div>
+            </div>
+        </div><br>
+
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                offset: 250,
+                duration: 1000,
+            });
+        </script>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+
+    </section>
+
+    <footer id="footer" class="footer-1">
+      <div class="main-footer widgets-dark typo-light">
+      <div class="container">
+      <div class="row">
+
+      <div class="col-xs-12 col-sm-6 col-md-5">
+      <div class="widget subscribe no-box">
+      <h5 class="widget-title">ABOUT PROJECT<span></span></h5>
+      <p>if you want to check your current health statastics then you can use this web application. you can check
+          diabetes, heart disease, breast cancer and liver disease by just filling the few values and you will get
+          results weather you are suffering from any disease or not.</p>
+      </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="widget no-box">
+      <h5 class="widget-title">Get Started<hr style=" width:60%; background-color:white;"></h5>
+      <ul Quick Links>
+        <li><a href="/heart_disease">Heart Disease</a></p></li>
+        <li><a href="/diabetes">Diabetes</a></p></li>
+        <li><a href="/parkinson's_disease">Parkinson's disease</a></p></li>
+        <li><a href="/cancer">Cancer</a></p></li>
+        <li><a href="/malaria">Malaria</a></p></li>
+      </ul>
+      </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4">
+
+      <div class="widget no-box">
+
+        <h5 class="widget-title">Contact Us</h5>
+
+        Email:<br><a href="mailto:psquare1101@gmail.com" title="glorythemes">psquare1101@gmail.com</a><br><br>
+
+        GitHub:<br><a href="https://github.com/pratikrj1601">https://github.com/pratikrj1601</a>
+        <a href="https://github.com/Pinal-11">https://github.com/Pinal-11</a><br><br>
+
+        LinkedIn: <br><a href="https://www.linkedin.com/in/pratik-joshi01/">https://www.linkedin.com/in/pratik-joshi01/</a>
+        <a href="https://www.linkedin.com/in/pinal-dadhania/">https://www.linkedin.com/in/pinal-dadhania/</a>
+
+      </div>
+      </div>
+
+      </div>
+      </div>
+      </div>
+
+      <div style="color:white;" class="footer-copyright">
+          <center>All Rights are reserved By Pinal & Pratik</center>
+      </div>
+      </footer>
+</body>
+</html>
